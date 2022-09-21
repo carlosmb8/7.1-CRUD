@@ -7,6 +7,9 @@ import com.example.ej2crudjpa.entity.Asignatura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class AsignaturaControlador {
 
@@ -14,7 +17,7 @@ public class AsignaturaControlador {
     AsignaturaServiceImpl asignaturaServiceImpl;
 
     @GetMapping("asignaturas/{id}")
-    public Asignatura dameAsignatura(@PathVariable String id, @RequestParam String outputType) {
+    public Asignatura dameAsignatura(@PathVariable String id, @RequestParam(required = false) String outputType) {
         return asignaturaServiceImpl.buscarAsignaturaPorId(id);
     }
 
@@ -25,24 +28,23 @@ public class AsignaturaControlador {
 //    }
 
     @GetMapping("asignaturas")
-    public Iterable<Asignatura> dameAsignaturas() throws Exception{
+    public Iterable<AsignaturaOutputDTO> dameAsignaturas() throws Exception{
 
         return asignaturaServiceImpl.dameAllAsignaturas();
     }
 
     @PostMapping("asignaturas/insertar")
-    public String insertaAsignatura(@RequestBody AsignaturaInputDTO asignaturaDTO) {
+    public AsignaturaOutputDTO insertaAsignatura(@RequestBody AsignaturaInputDTO asignaturaDTO) {
 
-        asignaturaServiceImpl.insertarAsignatura(asignaturaDTO);
+        return asignaturaServiceImpl.insertarAsignatura(asignaturaDTO);
 
-        return "Asignatura insertada correctamente";
 
     }
 
     @PutMapping("asignaturas/editar")
-    public AsignaturaOutputDTO editarAsignatura(@RequestParam String id, @RequestBody Asignatura asignatura) {
+    public AsignaturaOutputDTO editarAsignatura(@RequestParam String id, @RequestBody AsignaturaInputDTO asignaturaInputDTO) {
 
-        return asignaturaServiceImpl.editarAsignatura(id, asignatura);
+        return asignaturaServiceImpl.editarAsignatura(id, asignaturaInputDTO);
     }
 
     @DeleteMapping("asignaturas/eliminar")
@@ -57,6 +59,11 @@ public class AsignaturaControlador {
     @PostMapping("asignaturas/asociar/{id_asignatura}/{id_estudiante}")
     public void asociarAsignautra(@PathVariable String id_asignatura, @PathVariable String id_estudiante){
         asignaturaServiceImpl.asociarAsignatura(id_asignatura, id_estudiante);
+    }
+
+    @PostMapping("asignaturas/asociarlista/{id_estudiante}")
+    public void asociarAsignautras(@RequestBody ArrayList<String> listaIdAsignaturas, @PathVariable String id_estudiante){
+        asignaturaServiceImpl.asociarAsignaturas(listaIdAsignaturas, id_estudiante);
     }
 
 }

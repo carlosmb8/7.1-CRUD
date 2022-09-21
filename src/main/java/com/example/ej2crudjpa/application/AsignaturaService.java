@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface AsignaturaService {
     public AsignaturaOutputDTO insertarAsignatura(AsignaturaInputDTO asignaturaDTO);
-    public  AsignaturaOutputDTO editarAsignatura(String id, Asignatura asignatura);
+    public  AsignaturaOutputDTO editarAsignatura(String id, AsignaturaInputDTO asignatura);
     public void eliminarAsignatura(String id);
     public Asignatura buscarAsignaturaPorId(String id);
 //    public List<AsignaturaOutputDTO> buscarAsignaturasPorName(String name);
-    public List<Asignatura> dameAllAsignaturas() throws Exception;
+    public List<AsignaturaOutputDTO> dameAllAsignaturas() throws Exception;
 
     public void asociarAsignatura(String id_asignatura, String id_estudiante);
+
+    public void asociarAsignaturas(List<String> id_asignatura, String id_estudiante);
 }

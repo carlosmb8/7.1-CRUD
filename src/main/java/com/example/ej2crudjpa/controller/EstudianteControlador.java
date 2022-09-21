@@ -16,11 +16,24 @@ public class EstudianteControlador {
 
 
     @GetMapping("estudiantes/{id}")
-    public EstudianteOutputDTO dameEstudiante(@PathVariable String id) {
+    public EstudianteOutputDTO dameEstudiante(@PathVariable String id, @RequestParam(required = false) String outputType) {
         Estudiante e = estudianteServiceImpl.buscarEstudiantePorId(id);
         EstudianteOutputDTO estudianteOutputDTO = new EstudianteOutputDTO(e);
+
+        if(outputType == null){
+            outputType = "simple";
+        }
+
+        if(outputType.equals("full")){
+            return estudianteOutputDTO;
+        }
+
+
+        estudianteOutputDTO.setPersonaOutputDTO(null);
         return estudianteOutputDTO;
     }
+
+
 
 //    @PostMapping("estudiantes")
 //    public List<EstudianteOutputDTO> dameEstudiantePorNombre(@RequestParam String name) {
@@ -29,23 +42,22 @@ public class EstudianteControlador {
 //    }
 
     @GetMapping("estudiantes")
-    public Iterable<Estudiante> dameEstudiantes() throws Exception{
+    public Iterable<EstudianteOutputDTO> dameEstudiantes() throws Exception{
 
         return estudianteServiceImpl.dameAllEstudiantes();
     }
 
     @PostMapping("estudiantes/insertar")
-    public String insertaEstudiante(@RequestBody EstudianteInputDTO estudianteDTO) {
+    public EstudianteOutputDTO insertaEstudiante(@RequestBody EstudianteInputDTO estudianteDTO) {
 
-        estudianteServiceImpl.insertarEstudiante(estudianteDTO);
+        return estudianteServiceImpl.insertarEstudiante(estudianteDTO);
 
-        return "Estudiante insertado correctamente";
 
     }
 
     @PutMapping("estudiantes/editar")
-    public void editarEstudiante(@RequestParam String id, @RequestBody Estudiante estudiante) {
-        estudianteServiceImpl.editarEstudiante(id, estudiante);
+    public EstudianteOutputDTO editarEstudiante(@RequestParam String id, @RequestBody EstudianteInputDTO estudianteDTO) {
+        return estudianteServiceImpl.editarEstudiante(id, estudianteDTO);
     }
 
     @DeleteMapping("estudiantes/eliminar")

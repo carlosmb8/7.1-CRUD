@@ -41,7 +41,7 @@ public class ProfesorControlador {
     }
 
     @PutMapping("profesores/editar")
-    public ProfesorOutputDTO editarProfesor(@RequestParam String id, @RequestBody Profesor profesor) {
+    public ProfesorOutputDTO editarProfesor(@RequestParam String id, @RequestBody ProfesorInputDTO profesor) {
         return profesorServiceImpl.editarProfesor(id, profesor);
     }
 

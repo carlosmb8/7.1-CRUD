@@ -4,6 +4,7 @@ import com.example.ej2crudjpa.dto.input.AsignaturaInputDTO;
 import com.example.ej2crudjpa.dto.output.AsignaturaOutputDTO;
 import com.example.ej2crudjpa.entity.Asignatura;
 import com.example.ej2crudjpa.entity.Estudiante;
+import com.example.ej2crudjpa.entity.Profesor;
 import com.example.ej2crudjpa.repository.AsignaturaRepositorio;
 import com.example.ej2crudjpa.repository.EstudianteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AsignaturaServiceImpl implements AsignaturaService {
@@ -31,29 +34,26 @@ public class AsignaturaServiceImpl implements AsignaturaService {
             return saveOutputDTO;
     }
 
-    /*
-    * Lo podria haber hecho directamente con findById en lugar de traerme todos los registros y luego recorrerlos
-    * hasta encontrar el que tiene la id pasada por parametro pero para usar findAll en algún lugar lo he hecho así
-    */
+
     @Override
-    public AsignaturaOutputDTO editarAsignatura(String id, Asignatura asignatura){
-        try {
+    public AsignaturaOutputDTO editarAsignatura(String id, AsignaturaInputDTO asignaturaInputDTO){
 
-            List<Asignatura> listaAsignaturas = asignaturaRepo.findAll();
-            for (int i = 0; i < listaAsignaturas.size(); i++) {
-                Asignatura e = listaAsignaturas.get(i);
-                if (e.getId_asignatura().equals(id)) {
-                    listaAsignaturas.set(i, asignatura);
-                    asignaturaRepo.save(listaAsignaturas.get(i));
-
-                }
-            }
-            Asignatura a = (asignaturaRepo.findById(id)).get();
-            return new AsignaturaOutputDTO(a);
-
-        } catch (Exception e) {
+        Optional<Asignatura> asignaturaOptional = asignaturaRepo.findById(id);
+        if(asignaturaOptional.isEmpty()){
             throw new EntityNotFoundException();
         }
+
+        Asignatura asignatura = asignaturaOptional.get();
+
+        asignatura.setAsignatura(asignaturaInputDTO.getAsignatura());
+        asignatura.setComents(asignaturaInputDTO.getComents());
+        asignatura.setInitial_date(asignaturaInputDTO.getInitial_date());
+        asignatura.setFinish_date(asignaturaInputDTO.getFinish_date());
+
+        asignaturaRepo.save(asignatura);
+
+        return new AsignaturaOutputDTO(asignatura);
+
     }
 
     @Override
@@ -86,10 +86,13 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 //    }
 
     @Override
-    public List<Asignatura> dameAllAsignaturas() throws Exception {
+    public List<AsignaturaOutputDTO> dameAllAsignaturas() throws Exception {
         try {
+            List<AsignaturaOutputDTO> listaAsignaturasDTO = new ArrayList<>();
+            List<Asignatura> listaAsignaturas = asignaturaRepo.findAll();
+            listaAsignaturas.forEach(asignatura -> {listaAsignaturasDTO.add(new AsignaturaOutputDTO(asignatura));});
+            return listaAsignaturasDTO;
 
-            return asignaturaRepo.findAll();
         } catch (Exception e) {
             throw new Exception("No hay registros");
         }
@@ -109,5 +112,24 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 //        asignaturaRepo.save(asignatura);
 
 //
+    }
+
+    @Override
+    @Transactional
+    public void asociarAsignaturas(List<String>listaIdAsignaturas, String id_estudiante) {
+
+        Estudiante estudiante = estudianteRepo.findById(id_estudiante).orElseThrow(EntityNotFoundException::new);
+
+//        for(int i=0; i<listaIdAsignaturas.size(); i++){
+
+//            Asignatura asignatura = asignaturaRepo.findById(listaIdAsignaturas.get(i)).orElseThrow(EntityNotFoundException::new);
+
+//        }
+
+        listaIdAsignaturas.forEach(id -> {
+            Asignatura asignatura = asignaturaRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+            asignatura.getEstudiantes().add(estudiante);
+        });
+
     }
 }

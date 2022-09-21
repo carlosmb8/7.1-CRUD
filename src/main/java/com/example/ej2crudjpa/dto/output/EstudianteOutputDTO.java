@@ -1,9 +1,12 @@
 package com.example.ej2crudjpa.dto.output;
 
 import com.example.ej2crudjpa.entity.Estudiante;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EstudianteOutputDTO {
     String id_estudiante;
     PersonaOutputDTO personaOutputDTO;

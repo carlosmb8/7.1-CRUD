@@ -1,0 +1,1182 @@
+{
+	"info": {
+		"_postman_id": "039edfb3-356b-448e-a8e5-7b85788325c9",
+		"name": "ej7-Crud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22794309"
+	},
+	"item": [
+		{
+			"name": "Asignatura",
+			"item": [
+				{
+					"name": "insertar asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asignatura\":\"Java\",\r\n    \"coments\":\"version 17\",\r\n    \"initial_date\":\"2022-09-01\",\r\n    \"finish_date\":\"2022-09-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar asignatura 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asignatura\":\"Angular\",\r\n    \"coments\":\"version 2.1\",\r\n    \"initial_date\":\"2022-09-01\",\r\n    \"finish_date\":\"2022-09-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "asociar asignatura 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/asociar/Asignatura_1/Estudiante_1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"asociar",
+								"Asignatura_1",
+								"Estudiante_1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "asociar asignatura 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/asociar/Asignatura_1/Estudiante_1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"asociar",
+								"Asignatura_1",
+								"Estudiante_1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "asociar lista asignaturas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"Asignatura_1\", \"Asignatura_2\"]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/asociarlista/Estudiante_3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"asociarlista",
+								"Estudiante_3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dame asignatura por id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "dame listado asignaturas",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "editar asignatura",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asignatura\":\"Java\",\r\n    \"coments\":\"version 18\",\r\n    \"initial_date\":\"2022-09-01\",\r\n    \"finish_date\":\"2022-09-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/asignaturas/editar?id_asignatura=\"Asignatura_1\"",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"editar"
+							],
+							"query": [
+								{
+									"key": "id_asignatura",
+									"value": "\"Asignatura_1\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar asignatura",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/asignaturas/borrar/Asignatura_1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"borrar",
+								"Asignatura_1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estudiantes",
+			"item": [
+				{
+					"name": "insertar estudiante 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":\"2\",\r\n    \"num_hours_week\":40,\r\n    \"coments\":\"mal estudiante\",\r\n    \"id_profesor\":\"1\",\r\n    \"branch\":\"Front\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/estudiantes/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudiantes",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar estudiante 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":\"2\",\r\n    \"num_hours_week\":40,\r\n    \"coments\":\"mal estudiante\",\r\n    \"id_profesor\":\"1\",\r\n    \"branch\":\"Front\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/estudiantes/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudiantes",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar estudiante 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":\"5\",\r\n    \"num_hours_week\":40,\r\n    \"coments\":\"mal estudiante\",\r\n    \"id_profesor\":\"1\",\r\n    \"branch\":\"Front\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/estudiantes/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudiantes",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dame estudiante full",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/estudiantes/Estudiante_1?outputType=full",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudiantes",
+								"Estudiante_1"
+							],
+							"query": [
+								{
+									"key": "outputType",
+									"value": "full"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dame estudiante simple",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/estudiantes/Estudiante_1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"estudiantes",
+								"Estudiante_1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dame listado estudiantes",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar estudiante",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "editar estudiante",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personas",
+			"item": [
+				{
+					"name": "insertar persona 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\":\"pepe1\",\r\n    \"password\":\"12345\",\r\n    \"name\":\"Pepe\",\r\n    \"surname\":\"Salazar\",\r\n    \"company_email\":\"a@gmail.com\",\r\n    \"personal_email\":\"b@gmail.com\",\r\n    \"city\":\"jaen\",\r\n    \"active\":true,\r\n    \"created_date\":\"2022-08-25\",\r\n    \"imagen_url\":\"a.jpg\",\r\n    \"termination_date\":\"2022-08-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"insertar"
+							],
+							"query": [
+								{
+									"key": "id_persona",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "carlos1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Martos",
+									"disabled": true
+								},
+								{
+									"key": "company_email",
+									"value": "a@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "personal_email",
+									"value": "b@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Jaen",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "created_date",
+									"value": "25/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "image_url",
+									"value": "hola.png",
+									"disabled": true
+								},
+								{
+									"key": "termination_date",
+									"value": "26/08/2022",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar persona 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\":\"paco12\",\r\n    \"password\":\"12345\",\r\n    \"name\":\"Paco\",\r\n    \"surname\":\"Palacios\",\r\n    \"company_email\":\"a@gmail.com\",\r\n    \"personal_email\":\"b@gmail.com\",\r\n    \"city\":\"jaen\",\r\n    \"active\":true,\r\n    \"created_date\":\"2022-08-25\",\r\n    \"imagen_url\":\"a.jpg\",\r\n    \"termination_date\":\"2022-08-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"insertar"
+							],
+							"query": [
+								{
+									"key": "id_persona",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "carlos1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Martos",
+									"disabled": true
+								},
+								{
+									"key": "company_email",
+									"value": "a@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "personal_email",
+									"value": "b@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Jaen",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "created_date",
+									"value": "25/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "image_url",
+									"value": "hola.png",
+									"disabled": true
+								},
+								{
+									"key": "termination_date",
+									"value": "26/08/2022",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar persona 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\":\"carlos123\",\r\n    \"password\":\"12345\",\r\n    \"name\":\"Carlos\",\r\n    \"surname\":\"Ruiz\",\r\n    \"company_email\":\"a@gmail.com\",\r\n    \"personal_email\":\"b@gmail.com\",\r\n    \"city\":\"jaen\",\r\n    \"active\":true,\r\n    \"created_date\":\"2022-08-25\",\r\n    \"imagen_url\":\"a.jpg\",\r\n    \"termination_date\":\"2022-08-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"insertar"
+							],
+							"query": [
+								{
+									"key": "id_persona",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "carlos1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Martos",
+									"disabled": true
+								},
+								{
+									"key": "company_email",
+									"value": "a@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "personal_email",
+									"value": "b@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Jaen",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "created_date",
+									"value": "25/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "image_url",
+									"value": "hola.png",
+									"disabled": true
+								},
+								{
+									"key": "termination_date",
+									"value": "26/08/2022",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar persona 4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\":\"oscar1234\",\r\n    \"password\":\"12345\",\r\n    \"name\":\"Oscar\",\r\n    \"surname\":\"Martinez\",\r\n    \"company_email\":\"a@gmail.com\",\r\n    \"personal_email\":\"b@gmail.com\",\r\n    \"city\":\"jaen\",\r\n    \"active\":true,\r\n    \"created_date\":\"2022-08-25\",\r\n    \"imagen_url\":\"a.jpg\",\r\n    \"termination_date\":\"2022-08-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"insertar"
+							],
+							"query": [
+								{
+									"key": "id_persona",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "carlos1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Martos",
+									"disabled": true
+								},
+								{
+									"key": "company_email",
+									"value": "a@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "personal_email",
+									"value": "b@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Jaen",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "created_date",
+									"value": "25/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "image_url",
+									"value": "hola.png",
+									"disabled": true
+								},
+								{
+									"key": "termination_date",
+									"value": "26/08/2022",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar persona 5",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario\":\"ruben12345\",\r\n    \"password\":\"12345\",\r\n    \"name\":\"Ruben\",\r\n    \"surname\":\"Hinojosa\",\r\n    \"company_email\":\"a@gmail.com\",\r\n    \"personal_email\":\"b@gmail.com\",\r\n    \"city\":\"jaen\",\r\n    \"active\":true,\r\n    \"created_date\":\"2022-08-25\",\r\n    \"imagen_url\":\"a.jpg\",\r\n    \"termination_date\":\"2022-08-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"insertar"
+							],
+							"query": [
+								{
+									"key": "id_persona",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "usuario",
+									"value": "carlos1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Martos",
+									"disabled": true
+								},
+								{
+									"key": "company_email",
+									"value": "a@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "personal_email",
+									"value": "b@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Jaen",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "created_date",
+									"value": "25/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "image_url",
+									"value": "hola.png",
+									"disabled": true
+								},
+								{
+									"key": "termination_date",
+									"value": "26/08/2022",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listado personas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/personas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "aaaaa",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dame persona por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/personas/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dame personas por nombre",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"carlos\",\r\n    \"edad\":12,\r\n    \"poblacion\":\"jaen\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas?name=Carlos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas"
+							],
+							"query": [
+								{
+									"key": "edad",
+									"value": "19",
+									"disabled": true
+								},
+								{
+									"key": "poblacion",
+									"value": "jaen",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editar persona",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":3,\r\n    \"usuario\":\"carlos1.1\",\r\n    \"password\":\"12345\",\r\n    \"name\":\"Carlos\",\r\n    \"surname\":\"Martos\",\r\n    \"comapny_email\":\"a@gmail.com\",\r\n    \"personal_email\":\"b@gmail.com\",\r\n    \"city\":\"jaen\",\r\n    \"active\":true,\r\n    \"created_date\":\"2022-08-25\",\r\n    \"imagen_url\":\"a.jpg\",\r\n    \"termination_date\":\"2022-08-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personas/editar?id=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"editar"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "carlos1",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Carlos",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Martos",
+									"disabled": true
+								},
+								{
+									"key": "company_email",
+									"value": "a@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "personal_email",
+									"value": "b@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "city",
+									"value": "Jaen",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "created_date",
+									"value": "25/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "image_url",
+									"value": "hola.png",
+									"disabled": true
+								},
+								{
+									"key": "termination_date",
+									"value": "26/08/2022",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar persona",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/personas/eliminar?id=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personas",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profesores",
+			"item": [
+				{
+					"name": "insertar profesor 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":2,\r\n    \"coments\":\"Buen profesor\",\r\n    \"branch\":\"Backend\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/profesores/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesores",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertar profesor 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":2,\r\n    \"coments\":\"Buen profesor\",\r\n    \"branch\":\"Backend\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/profesores/insertar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesores",
+								"insertar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar profesor por id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "dame listado profesores",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "editar profesor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_persona\":1,\r\n    \"coments\":\"Mal profesor\",\r\n    \"branch\":\"Frontend\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/profesores/editar/?id=Profesor_1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesores",
+								"editar",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "Profesor_1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar profesor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/profesores/eliminar?id=Profesor_1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesores",
+								"eliminar"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "Profesor_1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RestTemplate",
+			"item": [
+				{
+					"name": "pedirProfesorPorId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface EstudianteService {
     public EstudianteOutputDTO insertarEstudiante(EstudianteInputDTO estudianteDTO);
-    public void editarEstudiante(String id, Estudiante estudiante);
+    public EstudianteOutputDTO editarEstudiante(String id, EstudianteInputDTO estudiante);
     public String eliminarEstudiante(String id);
     public Estudiante buscarEstudiantePorId(String id);
 
 //    public List<EstudianteOutputDTO> buscarEstudiantesPorName(String name);
 
-    public List<Estudiante> dameAllEstudiantes() throws Exception;
+    public List<EstudianteOutputDTO> dameAllEstudiantes() throws Exception;
 }

@@ -47,17 +47,16 @@ public class PersonaControlador {
     }
 
     @PostMapping("personas/insertar")
-    public String insertaPersona(@RequestBody PersonaInputDTO personaDTO) {
+    public PersonaOutputDTO insertaPersona(@RequestBody PersonaInputDTO personaDTO) {
 
-        personaServiceImpl.insertarPersona(personaDTO);
+        return personaServiceImpl.insertarPersona(personaDTO);
 
-        return "Persona insertada correctamente";
 
     }
 
     @PutMapping("personas/editar")
-    public void editarPersona(@RequestParam Integer id, @RequestBody Persona persona) {
-        personaServiceImpl.editarPersona(id, persona);
+    public PersonaOutputDTO editarPersona(@RequestParam Integer id, @RequestBody PersonaInputDTO persona) {
+        return personaServiceImpl.editarPersona(id, persona);
     }
 
     @DeleteMapping("personas/eliminar")

@@ -4,6 +4,7 @@ import com.example.ej2crudjpa.dto.input.ProfesorInputDTO;
 import com.example.ej2crudjpa.dto.output.ProfesorOutputDTO;
 import com.example.ej2crudjpa.entity.Persona;
 import com.example.ej2crudjpa.entity.Profesor;
+import com.example.ej2crudjpa.repository.PersonaRepositorio;
 import com.example.ej2crudjpa.repository.ProfesorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,17 @@ import java.util.Optional;
 public class ProfesorServiceImpl implements ProfesorService {
 
     @Autowired
-    PersonaServiceImpl ps;
+    PersonaServiceImpl personaServiceImpl;
+
+    @Autowired
+    PersonaRepositorio personaRepo;
     @Autowired
     ProfesorRepositorio profesorRepo;
 
     @Override
     public ProfesorOutputDTO insertarProfesor(ProfesorInputDTO profesorDTO) {
 
-        Persona persona = ps.buscarPersonaPorId(profesorDTO.getId_persona());
+        Persona persona = personaServiceImpl.buscarPersonaPorId(profesorDTO.getId_persona());
 
         Profesor profesor = new Profesor(profesorDTO);
         profesor.setPersona(persona);
@@ -34,22 +38,23 @@ public class ProfesorServiceImpl implements ProfesorService {
     }
 
     @Override
-    public ProfesorOutputDTO editarProfesor(String id, Profesor profesor) {
-        try {
-
-            List<Profesor> listaProfesors = profesorRepo.findAll();
-            for (int i = 0; i < listaProfesors.size(); i++) {
-                Profesor e = listaProfesors.get(i);
-                if (e.getId_profesor().equals(id)) {
-                    listaProfesors.set(i, profesor);
-                    profesorRepo.save(listaProfesors.get(i));
-                }
-            }
-            Profesor p = (profesorRepo.findById(id)).get();
-            return new ProfesorOutputDTO(p);
-        } catch (Exception e) {
+    public ProfesorOutputDTO editarProfesor(String id, ProfesorInputDTO profesorInputDTO) {
+        
+        Optional<Profesor> profesorOptional = profesorRepo.findById(id);
+        if(profesorOptional.isEmpty()){
             throw new EntityNotFoundException();
         }
+
+        Profesor profesor = profesorOptional.get();
+
+        Persona persona = personaRepo.findById(profesorInputDTO.getId_persona()).orElseThrow(EntityNotFoundException::new);
+
+        profesor.setPersona(persona);
+        profesor.setComents(profesorInputDTO.getComents());
+        profesor.setBranch(profesorInputDTO.getBranch());
+
+        profesorRepo.save(profesor);
+        return new ProfesorOutputDTO(profesor);
     }
 
     @Override

@@ -21,15 +21,14 @@ public class EstudianteInputDTO {
 
     }
 
-//    public EstudianteInputDTO(String id_estudiante, Integer id_persona, int num_hours_week, String coments, String id_profesor, String branch) {
-//        this.id_estudiante = id_estudiante;
-//        this.id_persona = id_persona;
-//        this.num_hours_week = num_hours_week;
-//        this.coments = coments;
-//        this.id_profesor = id_profesor;
-//        this.branch = branch;
-//    }
-//
+    public EstudianteInputDTO(String id_estudiante, Integer id_persona, int num_hours_week, String coments, String id_profesor, String branch) {
+        this.id_estudiante = id_estudiante;
+        this.id_persona = id_persona;
+        this.num_hours_week = num_hours_week;
+        this.coments = coments;
+        this.id_profesor = id_profesor;
+        this.branch = branch;
+    }
     public EstudianteInputDTO(String id_estudiante, Persona persona, int num_hours_week, String coments, Profesor profesor, String branch) {
         this.id_estudiante = id_estudiante;
         this.persona = persona;

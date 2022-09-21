@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PersonaService {
     public PersonaOutputDTO insertarPersona(PersonaInputDTO personaDTO);
-    public void editarPersona(Integer id, Persona persona);
+    public PersonaOutputDTO editarPersona(Integer id, PersonaInputDTO personaInputDTO);
     public void eliminarPersona(Integer id);
     public Persona buscarPersonaPorId(Integer id);
     public List<PersonaOutputDTO> buscarPersonaPorName(String name);

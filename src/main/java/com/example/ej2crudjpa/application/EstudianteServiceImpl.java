@@ -8,23 +8,31 @@ import com.example.ej2crudjpa.entity.Profesor;
 import com.example.ej2crudjpa.excepciones.UnprocessableEntityException;
 import com.example.ej2crudjpa.repository.EstudianteRepositorio;
 import com.example.ej2crudjpa.repository.PersonaRepositorio;
+import com.example.ej2crudjpa.repository.ProfesorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EstudianteServiceImpl implements EstudianteService{
 
     @Autowired
     PersonaServiceImpl personaServiceImpl;
+
+    @Autowired
+    PersonaRepositorio personaRepo;
     @Autowired
     EstudianteRepositorio estudianteRepo;
 
     @Autowired
     ProfesorServiceImpl profesorServiceImpl;
 
+    @Autowired
+    ProfesorRepositorio profesorRepo;
 
     @Override
     public EstudianteOutputDTO insertarEstudiante(EstudianteInputDTO estudianteDTO){
@@ -43,20 +51,26 @@ public class EstudianteServiceImpl implements EstudianteService{
     }
 
     @Override
-    public void editarEstudiante(String id, Estudiante estudiante){
-        try {
+    public EstudianteOutputDTO editarEstudiante(String id, EstudianteInputDTO estudianteInputDTO){
 
-            List<Estudiante> listaEstudiantes = estudianteRepo.findAll();
-            for (int i = 0; i < listaEstudiantes.size(); i++) {
-                Estudiante e = listaEstudiantes.get(i);
-                if (e.getId_estudiante().equals(id)) {
-                    listaEstudiantes.set(i, estudiante);
-                    estudianteRepo.save(listaEstudiantes.get(i));
-                }
-            }
-        } catch (Exception e) {
+        Optional<Estudiante> estudianteOptional =  estudianteRepo.findById(id);
+        if(estudianteOptional.isEmpty()){
             throw new EntityNotFoundException();
         }
+
+        Estudiante estudiante = estudianteOptional.get();
+
+        Persona persona = personaRepo.findById(estudianteInputDTO.getId_persona()).orElseThrow(EntityNotFoundException::new);
+        Profesor profesor = profesorRepo.findById(estudianteInputDTO.getId_profesor()).orElseThrow(EntityNotFoundException::new);
+
+        estudiante.setPersona(persona);
+        estudiante.setNum_hours_week(estudianteInputDTO.getNum_hours_week());
+        estudiante.setComents(estudianteInputDTO.getComents());
+        estudiante.setProfesor(profesor);
+        estudiante.setBranch(estudianteInputDTO.getBranch());
+
+        estudianteRepo.save(estudiante);
+        return new EstudianteOutputDTO(estudiante);
     }
 
     @Override
@@ -90,10 +104,12 @@ public class EstudianteServiceImpl implements EstudianteService{
 //    }
 
     @Override
-    public List<Estudiante> dameAllEstudiantes() throws Exception {
+    public List<EstudianteOutputDTO> dameAllEstudiantes() throws Exception {
         try {
-
-            return estudianteRepo.findAll();
+            List<EstudianteOutputDTO> listaEstudiantesDTO = new ArrayList<>();
+            List<Estudiante> listaEstudiantes = estudianteRepo.findAll();
+            listaEstudiantes.forEach(estudiante ->{listaEstudiantesDTO.add(new EstudianteOutputDTO(estudiante));});
+            return listaEstudiantesDTO;
         } catch (Exception e) {
             throw new Exception("No hay registros");
         }

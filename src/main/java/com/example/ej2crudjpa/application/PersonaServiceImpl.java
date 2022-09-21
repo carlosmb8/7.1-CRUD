@@ -11,15 +11,16 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class PersonaServiceImpl implements PersonaService{
+public class PersonaServiceImpl implements PersonaService {
 
     @Autowired
     PersonaRepositorio personaRepo;
 
     @Override
-    public PersonaOutputDTO insertarPersona(PersonaInputDTO personaDTO){
+    public PersonaOutputDTO insertarPersona(PersonaInputDTO personaDTO) {
         if (personaDTO.getUsuario().length() > 10) {
             throw new UnprocessableEntityException();
         } else {
@@ -31,20 +32,30 @@ public class PersonaServiceImpl implements PersonaService{
     }
 
     @Override
-    public void editarPersona(Integer id, Persona persona){
-        try {
+    public PersonaOutputDTO editarPersona(Integer id, PersonaInputDTO personaInputDTO) {
 
-            List<Persona> listapersonas = personaRepo.findAll();
-            for (int i = 0; i < listapersonas.size(); i++) {
-                Persona p = listapersonas.get(i);
-                if (p.getId_persona().equals(id)) {
-                    listapersonas.set(i, persona);
-                    personaRepo.save(listapersonas.get(i));
-                }
-            }
-        } catch (Exception e) {
+        Optional<Persona> personaOptional = personaRepo.findById(id);
+        if (personaOptional.isEmpty()) {
+
             throw new EntityNotFoundException();
         }
+
+        Persona persona = personaOptional.get();
+
+        persona.setUsuario(personaInputDTO.getUsuario());
+        persona.setPassword(personaInputDTO.getPassword());
+        persona.setName(personaInputDTO.getName());
+        persona.setSurname(personaInputDTO.getSurname());
+        persona.setCompany_email(personaInputDTO.getCompany_email());
+        persona.setPersonal_email(personaInputDTO.getPersonal_email());
+        persona.setCity(personaInputDTO.getCity());
+        persona.setActive(personaInputDTO.isActive());
+        persona.setImagen_url(personaInputDTO.getImagen_url());
+
+        personaRepo.save(persona);
+
+        return new PersonaOutputDTO(persona);
+
     }
 
     @Override
@@ -71,7 +82,7 @@ public class PersonaServiceImpl implements PersonaService{
         try {
             List<Persona> listaPersonas = personaRepo.findByName(name);
             List<PersonaOutputDTO> listaPersonasDTO = new ArrayList<>();
-            listaPersonas.forEach((p)-> {
+            listaPersonas.forEach((p) -> {
                 listaPersonasDTO.add(new PersonaOutputDTO(p));
             });
             return listaPersonasDTO;
